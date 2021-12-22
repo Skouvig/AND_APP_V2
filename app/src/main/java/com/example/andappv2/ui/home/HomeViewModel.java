@@ -7,10 +7,11 @@ import androidx.lifecycle.ViewModel;
 public class HomeViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
+    public int count =0;
 
     public HomeViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is home fragment");
+        mText.setValue(" " + count);
     }
 
     public LiveData<String> getText() {

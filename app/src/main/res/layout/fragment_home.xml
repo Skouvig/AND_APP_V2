@@ -6,17 +6,52 @@
     android:layout_height="match_parent"
     tools:context=".ui.home.HomeFragment">
 
-    <TextView
-        android:id="@+id/text_home"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
+
+    <Button
+        android:id="@+id/btn"
+        android:layout_width="312dp"
+        android:layout_height="320dp"
+        android:layout_marginBottom="120dp"
+        android:text="Click me"
+        android:textSize="30sp"
+        android:onClick="onClick"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="156dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="160dp"
+        android:layout_marginBottom="48dp"
+        android:text="Count: "
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textCount"
+        android:layout_width="156dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="48dp"
+        android:text=" "
+        android:textSize="30sp"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/btn"
+        app:layout_constraintStart_toEndOf="@+id/textView" />
+
+    <TextView
+        android:id="@+id/message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" "
+        android:textSize="20sp"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/textView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
