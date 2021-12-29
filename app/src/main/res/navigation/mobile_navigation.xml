@@ -22,4 +22,10 @@
         android:name="com.example.andappv2.ui.slideshow.StoreFragment"
         android:label="@string/menu_rewards"
         tools:layout="@layout/fragment_store" />
+
+    <fragment
+        android:id="@+id/activity_login"
+        android:name="com.example.andappv2.ui.login_activity"
+        android:label="Login"
+        tools:layout="@layout/activity_login" />
 </navigation>
