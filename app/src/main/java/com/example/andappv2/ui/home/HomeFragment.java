@@ -1,5 +1,7 @@
 package com.example.andappv2.ui.home;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,15 +17,23 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.andappv2.R;
 import com.example.andappv2.databinding.FragmentHomeBinding;
+import com.example.andappv2.ui.profile.Profile;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class HomeFragment extends Fragment {
 
     private HomeViewModel homeViewModel;
     private FragmentHomeBinding binding;
     private Button btn;
-    private int count = 0;
+    private int noOfClicks;
     private TextView textCount;
     private TextView message;
+    SharedPreferences sp;
+    private Profile profile;
+    private int click=1;
+
 
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -37,6 +47,11 @@ public class HomeFragment extends Fragment {
         textCount = rootView.findViewById(R.id.textCount);
         message = rootView.findViewById(R.id.message);
 
+        //Gets the current number of clicks from shared preferences
+        sp = getActivity().getSharedPreferences("TotalClicks", Context.MODE_PRIVATE);
+        //Add noOfClicks to the current number of clicks from shared preferences
+        noOfClicks = noOfClicks+(sp.getInt("clicks",0));
+
         // Inflate the layout for this fragment
         return rootView;
     }
@@ -44,27 +59,30 @@ public class HomeFragment extends Fragment {
     public void onViewCreated (@NonNull View view, @NonNull Bundle saveInstanceState){
         // OnClickListener for the button
         btn.setOnClickListener(v->{
-            count++;
-            textCount.setText(String.valueOf(count));
+            noOfClicks = noOfClicks+click;
+            textCount.setText(String.valueOf(noOfClicks));
+
+        //noOfClicks is added into shared preferences
+            SharedPreferences.Editor editor = sp.edit();
+            editor.putInt("clicks", noOfClicks);
+            editor.commit();
 
             //Different if statements for the message textbox
-            if (count < 1){
+            if (noOfClicks < 1){
                 message.setText("Start clicking");
-            } else if (count< 10){
+            } else if (noOfClicks< 10){
                 message.setText("Thats right!");
-            } else if ( count <30){
+            } else if ( noOfClicks <30){
                 message.setText("You got it, keep on clicking!");
-            } else if( count <50){
+            } else if( noOfClicks <50){
                 message.setText("Yes, just like that!");
-            } else if (count <80){
+            } else if (noOfClicks <80){
                 message.setText("You are soon able to get your first upgrade..");
-            } else if ( count <100){
+            } else if ( noOfClicks <100){
                 message.setText("Go for 100 clicks to unluck your first reward");
-            } else if ( count > 100){
+            } else if ( noOfClicks > 100){
                 message.setText("Go into the store to unlock your well deserved reward!");
             }
         });
     }
-
-
 }
